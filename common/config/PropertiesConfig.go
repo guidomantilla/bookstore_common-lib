@@ -6,22 +6,30 @@ import (
 )
 
 var (
-	propertiesConfigFlag *propertiesConfig
+	propertiesConfigFlag bool
 	Properties           map[string]string
 )
 
-type propertiesConfig struct {
+type PropertiesConfig struct {
 }
 
-func ConfigProperties() {
+func (propertiesConfig *PropertiesConfig) Config() {
 
-	if propertiesConfigFlag == nil {
+	if !propertiesConfigFlag {
 
 		Properties = make(map[string]string, 0)
 		for _, env := range os.Environ() {
 			pair := strings.SplitN(env, "=", 2)
 			Properties[pair[0]] = pair[1]
 		}
-		propertiesConfigFlag = &propertiesConfig{}
+
+		propertiesConfigFlag = true
+	}
+}
+
+func (propertiesConfig *PropertiesConfig) Add(prop string, value string) {
+
+	if Properties[prop] == "" {
+		Properties[prop] = value
 	}
 }

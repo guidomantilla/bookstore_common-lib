@@ -5,16 +5,16 @@ import (
 )
 
 var (
-	zapLoggerConfigFlag *zapLoggerConfig
+	zapLoggerConfigFlag bool
 	ZapLogger           *zap.Logger
 )
 
-type zapLoggerConfig struct {
+type ZapLoggerConfig struct {
 }
 
-func ConfigZapLogger(environment string) {
+func (zapLoggerConfig *ZapLoggerConfig) Config(environment string) {
 
-	if zapLoggerConfigFlag == nil {
+	if !zapLoggerConfigFlag {
 
 		var logConfig zap.Config
 		if environment == "pro" {
@@ -29,6 +29,6 @@ func ConfigZapLogger(environment string) {
 			panic(err)
 		}
 
-		zapLoggerConfigFlag = &zapLoggerConfig{}
+		zapLoggerConfigFlag = true
 	}
 }
