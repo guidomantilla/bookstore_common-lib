@@ -9,10 +9,14 @@ var (
 	ZapLogger           *zap.Logger
 )
 
-type ZapLoggerConfig struct {
+type zapLoggerConfig struct {
 }
 
-func (zapLoggerConfig *ZapLoggerConfig) Config(environment string) {
+func NewZapLoggerConfig() *zapLoggerConfig {
+	return &zapLoggerConfig{}
+}
+
+func (zapLoggerConfig *zapLoggerConfig) Config(environment string) {
 
 	if !zapLoggerConfigFlag {
 

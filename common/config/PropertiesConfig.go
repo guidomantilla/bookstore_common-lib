@@ -10,10 +10,14 @@ var (
 	Properties           map[string]string
 )
 
-type PropertiesConfig struct {
+type propertiesConfig struct {
 }
 
-func (propertiesConfig *PropertiesConfig) Config() {
+func NewPropertiesConfig() *propertiesConfig {
+	return &propertiesConfig{}
+}
+
+func (propertiesConfig *propertiesConfig) Config() {
 
 	if !propertiesConfigFlag {
 
@@ -27,7 +31,7 @@ func (propertiesConfig *PropertiesConfig) Config() {
 	}
 }
 
-func (propertiesConfig *PropertiesConfig) Add(prop string, value string) {
+func (propertiesConfig *propertiesConfig) Add(prop string, value string) {
 
 	if Properties[prop] == "" {
 		Properties[prop] = value
